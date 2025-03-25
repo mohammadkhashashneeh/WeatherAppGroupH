@@ -12,7 +12,7 @@ const preferencesRoute = require("./routes/PreferenceRoute");
 
 app.use(express.json());
 app.use(cookieParser());
-const frontendURL = "http://localhost:3000";
+const frontendURL = "https://weather-app-kd.netlify.app";
 
 app.use(
   cors({
