@@ -45,7 +45,7 @@ const registerCtrl = async (req, res) => {
     res.cookie("authToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -93,7 +93,7 @@ const loginCtrl = async (req, res) => {
     res.cookie("authToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -111,7 +111,7 @@ const logoutCtrl = (req, res) => {
   res.clearCookie("authToken", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "Strict",
+    sameSite: "None",
   });
   res.json({ message: "Loggedout" });
 };
