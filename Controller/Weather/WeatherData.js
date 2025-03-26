@@ -44,7 +44,6 @@ const weatherSchema = Joi.alternatives().try(
  * }
  */
 const getWeatherDataCtrl = async (req, res) => {
-
   const { error } = weatherSchema.validate(req.query);
   if (error) return res.status(400).json({ error: error.details[0].message });
 
@@ -63,17 +62,19 @@ const getWeatherDataCtrl = async (req, res) => {
       params.lon = lon;
     }
 
-    
     const response = await axios.get(OPENWEATHER_BASE_URL, { params });
 
     res.json(response.data);
   } catch (error) {
     console.error("Weather API Error:", error.response?.data || error.message);
-    res
-      .status(error.response?.status || 500)
-      .json({ error: error.response?.data || "Failed to fetch weather data" });
+    
+    const statusCode = error.response?.status || 500;
+    const errorMessage = error.response?.data?.message || "Failed to fetch weather data";
+
+    res.status(statusCode).json({ error: errorMessage });
   }
 };
+
 
 module.exports = {
   getWeatherDataCtrl,

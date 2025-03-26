@@ -68,9 +68,9 @@ const addPreferenceCtrl = async (req, res) => {
       user: user._id,
     });
 
-    await newPreference.save();
+    const savedPreference = await newPreference.save();
 
-    res.json(newPreference);
+    res.status(201).json(savedPreference); // Send response with 201 status
   } catch (error) {
     res.status(500).json({ error: "Failed to add favorite city" });
   }
